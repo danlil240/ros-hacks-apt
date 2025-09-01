@@ -1,0 +1,134 @@
+name: Update APT Repository
+
+on:
+  workflow_dispatch:
+    inputs:
+      source_repo:
+        description: 'Source repository to build from'
+        required: false
+        default: 'danlil240/ROS-Hacks'
+      source_ref:
+        description: 'Branch/tag to build from'
+        required: false
+        default: 'main'
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  update-apt-repo:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    
+    steps:
+      - name: Checkout APT repository
+        uses: actions/checkout@v4
+        with:
+          path: apt-repo
+          
+      - name: Checkout source repository
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ github.event.inputs.source_repo || 'danlil240/ROS-Hacks' }}
+          ref: ${{ github.event.inputs.source_ref || 'main' }}
+          path: source
+          
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y dpkg-dev debhelper build-essential gnupg fakeroot
+          
+      - name: Import GPG key
+        if: ${{ secrets.APT_GPG_PRIVATE_KEY }}
+        run: |
+          echo "${{ secrets.APT_GPG_PRIVATE_KEY }}" | gpg --batch --yes --pinentry-mode loopback --passphrase "${{ secrets.APT_GPG_PASSPHRASE }}" --import
+          gpg --list-keys
+          
+      - name: Build package
+        run: |
+          cd source
+          dpkg-buildpackage -us -uc -b -d
+          
+      - name: Update APT repository
+        run: |
+          cd apt-repo
+          
+          # Copy new package
+          cp ../source/../*.deb pool/main/
+          
+          # Update packages index
+          dpkg-scanpackages --multiversion pool/ > dists/stable/main/binary-amd64/Packages
+          gzip -k -f dists/stable/main/binary-amd64/Packages
+          
+          # Create empty i386 packages
+          mkdir -p dists/stable/main/binary-i386
+          touch dists/stable/main/binary-i386/Packages
+          gzip -k -f dists/stable/main/binary-i386/Packages
+          
+          # Create Release file
+          cat > dists/stable/Release <<EOF
+          Origin: ROS-Hacks Repository
+          Label: ROS-Hacks
+          Suite: stable
+          Codename: stable
+          Architectures: amd64 i386
+          Components: main
+          Description: ROS-Hacks APT Repository
+          Date: $(date -R -u)
+          EOF
+          
+          # Add file hashes
+          echo "SHA256:" >> dists/stable/Release
+          for f in dists/stable/main/binary-*/Packages*; do
+            echo -n " " >> dists/stable/Release
+            echo -n $(sha256sum $f | cut -d" " -f1) >> dists/stable/Release
+            echo -n " " >> dists/stable/Release  
+            echo -n $(stat -c%s $f) >> dists/stable/Release
+            echo " $(echo $f | sed 's|^dists/stable/||')" >> dists/stable/Release
+          done
+          
+          echo "MD5Sum:" >> dists/stable/Release
+          for f in dists/stable/main/binary-*/Packages*; do
+            echo -n " " >> dists/stable/Release
+            echo -n $(md5sum $f | cut -d" " -f1) >> dists/stable/Release
+            echo -n " " >> dists/stable/Release
+            echo -n $(stat -c%s $f) >> dists/stable/Release  
+            echo " $(echo $f | sed 's|^dists/stable/||')" >> dists/stable/Release
+          done
+          
+      - name: Sign Release
+        if: ${{ secrets.APT_GPG_PRIVATE_KEY }}
+        run: |
+          cd apt-repo
+          rm -f dists/stable/Release.gpg dists/stable/InRelease
+          
+          # Use stored key fingerprint if available
+          if [ -f .signing_key_fpr ]; then
+            SIGNING_KEY=$(cat .signing_key_fpr)
+          else
+            SIGNING_KEY="${{ secrets.APT_GPG_KEY_NAME }}"
+          fi
+          
+          gpg --batch --yes --pinentry-mode loopback --passphrase "${{ secrets.APT_GPG_PASSPHRASE }}" \
+            --default-key "$SIGNING_KEY" -abs -o dists/stable/Release.gpg dists/stable/Release
+          gpg --batch --yes --pinentry-mode loopback --passphrase "${{ secrets.APT_GPG_PASSPHRASE }}" \
+            --default-key "$SIGNING_KEY" --clearsign -o dists/stable/InRelease dists/stable/Release
+          gpg --armor --export "$SIGNING_KEY" > ros-hacks.key
+          
+      - name: Commit and push changes
+        run: |
+          cd apt-repo
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .
+          
+          if ! git diff --staged --quiet; then
+            git commit -m "Update APT repository - $(date '+%Y-%m-%d %H:%M:%S')"
+            git push
+          else
+            echo "No changes to commit"
+          fi
