@@ -27,6 +27,22 @@ sudo apt install ros-hacks
 ros-hacks-setup
 ```
 
+## Troubleshooting
+
+### GPG Signature Verification Error
+
+If you see an error like `NO_PUBKEY` or signature verification failures after a repository update:
+
+```bash
+# Re-download and update the GPG key
+wget -qO /tmp/ros-hacks.key https://danlil240.github.io/ros-hacks-apt/ros-hacks.key
+sudo rm -f /etc/apt/keyrings/ros-hacks.gpg
+cat /tmp/ros-hacks.key | sudo gpg --dearmor -o /etc/apt/keyrings/ros-hacks.gpg
+sudo apt update
+```
+
+This refreshes the public key used to verify package signatures.
+
 ## Features and Usage
 
 ### ROS2 Workspace Management

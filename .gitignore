@@ -1,0 +1,5 @@
+# GPG private key backup - DO NOT COMMIT
+.gpg-backup/
+
+# Signing key fingerprint cache
+.signing_key_fpr
