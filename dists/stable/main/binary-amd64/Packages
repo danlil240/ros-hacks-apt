@@ -225,10 +225,10 @@ Maintainer: Daniel <danlil240@gmail.com>
 Installed-Size: 172
 Depends: tmux, python3-colcon-common-extensions, ninja-build, git, gcc-12, g++-12
 Filename: pool/main/ros-hacks_1.0.38-1_all.deb
-Size: 33546
-MD5sum: 548918d2c71e66bd95b256c3639e9ccf
-SHA1: fb35b290d76209f6882d426969e84bbbe29a2b2b
-SHA256: 1a1a9238ac55462551b5e2a8d9d5b0d0e9e51a4be672ec10d2246f50b7ed0114
+Size: 33550
+MD5sum: 670221455bd7a85723e33195255d4e94
+SHA1: c55fb6ffc8921a0972fd6997649940fce872b906
+SHA256: 2024c37aa0587a12c814cf82149e056c529587d2661ffe7a1e291e8d8a31c869
 Section: utils
 Priority: optional
 Homepage: https://github.com/danlil240/ROS-Hacks
