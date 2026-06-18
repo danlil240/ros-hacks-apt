@@ -62,13 +62,53 @@ Package: ros-hacks
 Version: 1.0.30-1
 Architecture: all
 Maintainer: Daniel <danlil240@gmail.com>
-Installed-Size: 126
+Installed-Size: 129
 Depends: tmux, python3-colcon-common-extensions, ninja-build, git, gcc-12, g++-12
 Filename: pool/main/ros-hacks_1.0.30-1_all.deb
-Size: 26136
-MD5sum: ceba818f22078010ad0eb817d82252fb
-SHA1: 4557beaf670d00fc6201f43af403ae8e52c23168
-SHA256: dfe12b86748bbcec87fb2d0b3d5106e84d294a7c81ccdc2408d9e026693d9f9a
+Size: 26060
+MD5sum: a816d232695504da106b65554c05589a
+SHA1: 49499d067badd1b4725a70bff4353206565833d6
+SHA256: afa814ec3ab1d8b7cfd05fe5249fd8d6362ed19a05c6cf7e160a9702eee73477
+Section: utils
+Priority: optional
+Homepage: https://github.com/danlil240/ROS-Hacks
+Description: Utilities to make ROS development easier
+  ROS-Hacks provides useful aliases, functions, and keyboard shortcuts
+  to enhance the ROS development experience. It includes workspace
+  management, quick command execution, and various convenience
+  functions for both ROS1 and ROS2 development.
+
+Package: ros-hacks
+Version: 1.0.31-1
+Architecture: all
+Maintainer: Daniel <danlil240@gmail.com>
+Installed-Size: 139
+Depends: tmux, python3-colcon-common-extensions, ninja-build, git, gcc-12, g++-12
+Filename: pool/main/ros-hacks_1.0.31-1_all.deb
+Size: 27630
+MD5sum: e675c1c4372991195b7f63e37dcc5017
+SHA1: f01dc6b127800f2ed6be2324887b8acda6e883d3
+SHA256: 8ae469c9ac44854b2b79bc3e33d8895eb354d9ec8fed6166f8f1286941ade9a1
+Section: utils
+Priority: optional
+Homepage: https://github.com/danlil240/ROS-Hacks
+Description: Utilities to make ROS development easier
+  ROS-Hacks provides useful aliases, functions, and keyboard shortcuts
+  to enhance the ROS development experience. It includes workspace
+  management, quick command execution, and various convenience
+  functions for both ROS1 and ROS2 development.
+
+Package: ros-hacks
+Version: 1.0.32-1
+Architecture: all
+Maintainer: Daniel <danlil240@gmail.com>
+Installed-Size: 139
+Depends: tmux, python3-colcon-common-extensions, ninja-build, git, gcc-12, g++-12
+Filename: pool/main/ros-hacks_1.0.32-1_all.deb
+Size: 27654
+MD5sum: c13216852f1da35ace0a6479c56afcdb
+SHA1: ecd0a9036e27830395412415260889c40c3002a6
+SHA256: 3d667f82b8bc62ab32e42d8b46678cf46bda872820918766d672d72cf2347fa4
 Section: utils
 Priority: optional
 Homepage: https://github.com/danlil240/ROS-Hacks
@@ -82,13 +122,13 @@ Package: ros-hacks
 Version: 1.0.33-1
 Architecture: all
 Maintainer: Daniel <danlil240@gmail.com>
-Installed-Size: 154
+Installed-Size: 173
 Depends: tmux, python3-colcon-common-extensions, ninja-build, git, gcc-12, g++-12
 Filename: pool/main/ros-hacks_1.0.33-1_all.deb
-Size: 30096
-MD5sum: f2a12af509b31490da80fbffec3aadfc
-SHA1: 690b749dbfad47ed271c074ad2208a2f62e293dc
-SHA256: 3775287d5bc779cf65f49873f49e7c60e559c59046dc4d63c8bf5110da811230
+Size: 33620
+MD5sum: ff524f1f65f7b017ed136b599558ff82
+SHA1: c9c0fc3152476106d5737cc828fa7b158bddbef9
+SHA256: 8159a633f669a51ebee6db9eeee4fec8cfb7141fdcab7912fb753266633f6f32
 Section: utils
 Priority: optional
 Homepage: https://github.com/danlil240/ROS-Hacks
@@ -105,10 +145,10 @@ Maintainer: Daniel <danlil240@gmail.com>
 Installed-Size: 173
 Depends: tmux, python3-colcon-common-extensions, ninja-build, git, gcc-12, g++-12
 Filename: pool/main/ros-hacks_1.0.34-1_all.deb
-Size: 33640
-MD5sum: dbde615ed72f2d4b5786af03a0affd4e
-SHA1: 1935d7dca0116c673680d55e89497723688b741a
-SHA256: ce13090b3071fbc9f4a368a990adec9a361afa9d7405be4531edfa86d4acaacb
+Size: 33608
+MD5sum: 4f8d9a4ccb185cb27bc31b69e4bdd267
+SHA1: cceed86e4ba2fc846b2a44f6bbc06a32b29ce23a
+SHA256: 97036a1c641c19ac9c34a1d28e054059ac2371fb64ddbe8a145d058f300b0fe1
 Section: utils
 Priority: optional
 Homepage: https://github.com/danlil240/ROS-Hacks
@@ -125,10 +165,110 @@ Maintainer: Daniel <danlil240@gmail.com>
 Installed-Size: 173
 Depends: tmux, python3-colcon-common-extensions, ninja-build, git, gcc-12, g++-12
 Filename: pool/main/ros-hacks_1.0.35-1_all.deb
-Size: 33732
-MD5sum: e5e0a835bb1955d2ab699098975f1fe0
-SHA1: dabd8c674586ccc17f049225d99db980dec619e8
-SHA256: f0d44105785b02087ba3850de42c125afb9e3e386b10f2d0925f6573f7a13e70
+Size: 33696
+MD5sum: 2cdfaa63a715f6817449f5c948b3d271
+SHA1: b9dcec4b27a5a8f8e2a375b12a2a5ad807f084d1
+SHA256: 9fc6c886f7e3302bacfe1480e8429ae8bc7db85cd3e0b751b7c80e9a835b91fb
+Section: utils
+Priority: optional
+Homepage: https://github.com/danlil240/ROS-Hacks
+Description: Utilities to make ROS development easier
+  ROS-Hacks provides useful aliases, functions, and keyboard shortcuts
+  to enhance the ROS development experience. It includes workspace
+  management, quick command execution, and various convenience
+  functions for both ROS1 and ROS2 development.
+
+Package: ros-hacks
+Version: 1.0.36-1
+Architecture: all
+Maintainer: Daniel <danlil240@gmail.com>
+Installed-Size: 171
+Depends: tmux, python3-colcon-common-extensions, ninja-build, git, gcc-12, g++-12
+Filename: pool/main/ros-hacks_1.0.36-1_all.deb
+Size: 33470
+MD5sum: e3edd118651e8b52149c4e60e0e9781b
+SHA1: c11dfdab81928e9e872f6883e6d31f33318a7cdf
+SHA256: d3d0330a996f64d02d666329f76f9eed049cb7fdd3cf66ac27ab1b16ba83e12f
+Section: utils
+Priority: optional
+Homepage: https://github.com/danlil240/ROS-Hacks
+Description: Utilities to make ROS development easier
+  ROS-Hacks provides useful aliases, functions, and keyboard shortcuts
+  to enhance the ROS development experience. It includes workspace
+  management, quick command execution, and various convenience
+  functions for both ROS1 and ROS2 development.
+
+Package: ros-hacks
+Version: 1.0.37-1
+Architecture: all
+Maintainer: Daniel <danlil240@gmail.com>
+Installed-Size: 171
+Depends: tmux, python3-colcon-common-extensions, ninja-build, git, gcc-12, g++-12
+Filename: pool/main/ros-hacks_1.0.37-1_all.deb
+Size: 33532
+MD5sum: fbbd7629b37335284c430a8b8a63d079
+SHA1: b00d035c207f7c9ec3ae8af7ef29574c8dedfc8d
+SHA256: 030d58b0722030107dcc213c7bfe23acc90a7f3bd9d642b7648f5f8a745ac9d9
+Section: utils
+Priority: optional
+Homepage: https://github.com/danlil240/ROS-Hacks
+Description: Utilities to make ROS development easier
+  ROS-Hacks provides useful aliases, functions, and keyboard shortcuts
+  to enhance the ROS development experience. It includes workspace
+  management, quick command execution, and various convenience
+  functions for both ROS1 and ROS2 development.
+
+Package: ros-hacks
+Version: 1.0.38-1
+Architecture: all
+Maintainer: Daniel <danlil240@gmail.com>
+Installed-Size: 172
+Depends: tmux, python3-colcon-common-extensions, ninja-build, git, gcc-12, g++-12
+Filename: pool/main/ros-hacks_1.0.38-1_all.deb
+Size: 33550
+MD5sum: 670221455bd7a85723e33195255d4e94
+SHA1: c55fb6ffc8921a0972fd6997649940fce872b906
+SHA256: 2024c37aa0587a12c814cf82149e056c529587d2661ffe7a1e291e8d8a31c869
+Section: utils
+Priority: optional
+Homepage: https://github.com/danlil240/ROS-Hacks
+Description: Utilities to make ROS development easier
+  ROS-Hacks provides useful aliases, functions, and keyboard shortcuts
+  to enhance the ROS development experience. It includes workspace
+  management, quick command execution, and various convenience
+  functions for both ROS1 and ROS2 development.
+
+Package: ros-hacks
+Version: 1.0.39-1
+Architecture: all
+Maintainer: Daniel <danlil240@gmail.com>
+Installed-Size: 173
+Depends: tmux, python3-colcon-common-extensions, ninja-build, git, lsb-release
+Filename: pool/main/ros-hacks_1.0.39-1_all.deb
+Size: 33850
+MD5sum: e55c5a6facf692277793f97cdbbaa1b0
+SHA1: c1697d04379dfea0c8079e0cbb92aa0995e73c8e
+SHA256: ac34a3ea851072581c3753349ba41eda628ba35b803ce6a1165d0d7d0403f7df
+Section: utils
+Priority: optional
+Homepage: https://github.com/danlil240/ROS-Hacks
+Description: Utilities to make ROS development easier
+  ROS-Hacks provides useful aliases, functions, and keyboard shortcuts
+  to enhance the ROS development experience. It includes workspace
+  management, quick command execution, and various convenience
+  functions for both ROS1 and ROS2 development.
+
+Package: ros-hacks
+Version: 1.0.41-1
+Architecture: all
+Maintainer: Daniel <danlil240@gmail.com>
+Installed-Size: 173
+Depends: tmux, python3-colcon-common-extensions, ninja-build, git, lsb-release
+Filename: pool/main/ros-hacks_1.0.41-1_all.deb
+Size: 33994
+MD5sum: d5e9e3ccb43406d38e835aefd7e49eee
+SHA1: 900643dd191840f8365815d2b5876ed5a1922229
+SHA256: 4442594d8b079a5d7ef6f363ea13bf5e4717694d28f3f3633392ed77ad8958af
 Section: utils
 Priority: optional
 Homepage: https://github.com/danlil240/ROS-Hacks

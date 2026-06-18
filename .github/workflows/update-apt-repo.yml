@@ -43,10 +43,11 @@ jobs:
           sudo apt-get install -y dpkg-dev debhelper build-essential gnupg fakeroot
           
       - name: Import GPG key
-        if: ${{ secrets.APT_GPG_PRIVATE_KEY }}
+        env:
+          APT_GPG_PRIVATE_KEY: ${{ secrets.APT_GPG_PRIVATE_KEY }}
         run: |
-          echo "${{ secrets.APT_GPG_PRIVATE_KEY }}" | gpg --batch --yes --pinentry-mode loopback --passphrase "${{ secrets.APT_GPG_PASSPHRASE }}" --import
-          gpg --list-keys
+          echo "$APT_GPG_PRIVATE_KEY" | gpg --batch --import
+          gpg --list-secret-keys
           
       - name: Build package
         run: |
@@ -101,22 +102,14 @@ jobs:
           done
           
       - name: Sign Release
-        if: ${{ secrets.APT_GPG_PRIVATE_KEY }}
+        env:
+          APT_GPG_KEY_FPR: ${{ secrets.APT_GPG_KEY_NAME }}
         run: |
           cd apt-repo
           rm -f dists/stable/Release.gpg dists/stable/InRelease
-          
-          # Use stored key fingerprint if available
-          if [ -f .signing_key_fpr ]; then
-            SIGNING_KEY=$(cat .signing_key_fpr)
-          else
-            SIGNING_KEY="${{ secrets.APT_GPG_KEY_NAME }}"
-          fi
-          
-          gpg --batch --yes --pinentry-mode loopback --passphrase "${{ secrets.APT_GPG_PASSPHRASE }}" \
-            --default-key "$SIGNING_KEY" -abs -o dists/stable/Release.gpg dists/stable/Release
-          gpg --batch --yes --pinentry-mode loopback --passphrase "${{ secrets.APT_GPG_PASSPHRASE }}" \
-            --default-key "$SIGNING_KEY" --clearsign -o dists/stable/InRelease dists/stable/Release
+          SIGNING_KEY="$APT_GPG_KEY_FPR"
+          gpg --batch --yes --default-key "$SIGNING_KEY" -abs -o dists/stable/Release.gpg dists/stable/Release
+          gpg --batch --yes --default-key "$SIGNING_KEY" --clearsign -o dists/stable/InRelease dists/stable/Release
           gpg --armor --export "$SIGNING_KEY" > ros-hacks.key
           
       - name: Commit and push changes
