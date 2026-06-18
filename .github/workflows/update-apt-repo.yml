@@ -47,6 +47,12 @@ jobs:
           APT_GPG_PRIVATE_KEY: ${{ secrets.APT_GPG_PRIVATE_KEY }}
         run: |
           echo "$APT_GPG_PRIVATE_KEY" | gpg --batch --import
+          EXPECTED_FPR="$(tr -d '[:space:]' < apt-repo/SIGNING_KEY_FPR)"
+          IMPORTED_FPR="$(gpg --list-secret-keys --with-colons | awk -F: '/^fpr:/ {print $10; exit}')"
+          if [ "$IMPORTED_FPR" != "$EXPECTED_FPR" ]; then
+            echo "ERROR: Imported key ($IMPORTED_FPR) does not match SIGNING_KEY_FPR ($EXPECTED_FPR)" >&2
+            exit 1
+          fi
           gpg --list-secret-keys
           
       - name: Build package
@@ -106,11 +112,21 @@ jobs:
           APT_GPG_KEY_FPR: ${{ secrets.APT_GPG_KEY_NAME }}
         run: |
           cd apt-repo
+          EXPECTED_FPR="$(tr -d '[:space:]' < SIGNING_KEY_FPR)"
+          SIGNING_KEY="$EXPECTED_FPR"
+          if [ -n "$APT_GPG_KEY_FPR" ] && [ "$APT_GPG_KEY_FPR" != "$EXPECTED_FPR" ]; then
+            echo "ERROR: APT_GPG_KEY_NAME secret ($APT_GPG_KEY_FPR) does not match SIGNING_KEY_FPR ($EXPECTED_FPR)" >&2
+            exit 1
+          fi
           rm -f dists/stable/Release.gpg dists/stable/InRelease
-          SIGNING_KEY="$APT_GPG_KEY_FPR"
           gpg --batch --yes --default-key "$SIGNING_KEY" -abs -o dists/stable/Release.gpg dists/stable/Release
           gpg --batch --yes --default-key "$SIGNING_KEY" --clearsign -o dists/stable/InRelease dists/stable/Release
           gpg --armor --export "$SIGNING_KEY" > ros-hacks.key
+          EXPORTED_FPR="$(gpg --with-colons --import-options show-only --import < ros-hacks.key | awk -F: '/^fpr:/ {print $10; exit}')"
+          if [ "$EXPORTED_FPR" != "$EXPECTED_FPR" ]; then
+            echo "ERROR: ros-hacks.key fingerprint ($EXPORTED_FPR) does not match canonical key ($EXPECTED_FPR)" >&2
+            exit 1
+          fi
           
       - name: Commit and push changes
         run: |
