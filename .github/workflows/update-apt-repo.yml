@@ -133,7 +133,7 @@ jobs:
           cd apt-repo
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add .
+          git add dists/ pool/ ros-hacks.key README.md SIGNING_KEY_FPR AGENTS.md
           
           if ! git diff --staged --quiet; then
             git commit -m "Update APT repository - $(date '+%Y-%m-%d %H:%M:%S')"
