@@ -282,13 +282,13 @@ Package: ros-hacks
 Version: 1.0.42-1
 Architecture: all
 Maintainer: Daniel <danlil240@gmail.com>
-Installed-Size: 175
+Installed-Size: 184
 Depends: tmux, python3-colcon-common-extensions, ninja-build, git, lsb-release
 Filename: pool/main/ros-hacks_1.0.42-1_all.deb
-Size: 34476
-MD5sum: b23f98789214f6c473995b7243a387ac
-SHA1: 6628ccd5bf3cc7d9b463e52272b9c4540b8f75f2
-SHA256: 4fb0cfceb24533123580adc8c1fbb66c76a5def79bd52a4b3b2e736ab8ba9deb
+Size: 36198
+MD5sum: 1b3e7d559074187e1dc7258763c52b79
+SHA1: db4a33e46f35aff1d538e0448672fcf7feed293c
+SHA256: 6d06d926a4aa800671cba23a8f40e645533d84f3ba046bc240536e6982b7a9e2
 Section: utils
 Priority: optional
 Homepage: https://github.com/danlil240/ROS-Hacks
