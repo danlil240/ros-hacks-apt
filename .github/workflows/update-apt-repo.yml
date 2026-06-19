@@ -11,6 +11,8 @@ on:
         description: 'Branch/tag to build from'
         required: false
         default: 'main'
+  repository_dispatch:
+    types: [release-published]
 
 permissions:
   contents: write
@@ -33,8 +35,8 @@ jobs:
       - name: Checkout source repository
         uses: actions/checkout@v4
         with:
-          repository: ${{ github.event.inputs.source_repo || 'danlil240/ROS-Hacks' }}
-          ref: ${{ github.event.inputs.source_ref || 'main' }}
+          repository: ${{ github.event.client_payload.source_repo || github.event.inputs.source_repo || 'danlil240/ROS-Hacks' }}
+          ref: ${{ github.event.client_payload.source_ref || github.event.inputs.source_ref || 'main' }}
           path: source
           
       - name: Install dependencies
